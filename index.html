@@ -1,222 +1,936 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pottigari Harshitha Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* Sidebar and other necessary CSS goes here (as shown above) */
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harshitha Pottigari - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(ellipse at top, #1e1b4b 0%, #0a0a0a 50%),
+                        radial-gradient(ellipse at bottom, #7c3aed 0%, transparent 50%);
+        }
+
+        .background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: particle-float 15s infinite linear;
+        }
+
+        @keyframes particle-float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            to {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+	/* Navbar */
+	.navbar {
+            position: fixed;
+            top: 0;
+    	   right: 0;
+    	   padding: 1rem 2rem;
+    	   z-index: 100;
+	   width: auto;
+	}
+
+	.navbar ul {
+    	   list-style: none;
+    	   display: flex;
+            gap: 1.5rem;
+	}
+
+	.navbar a {
+    	   text-decoration: none;
+    	   color: rgba(255, 255, 255, 0.7);
+    	   font-weight: 500;
+    	   font-size: 1rem;
+    	   transition: color 0.3s ease, font-weight 0.3s ease;
+            padding-bottom: 5px; /* Add some space for the underline */
+	}
+
+	.navbar a:hover {
+    	   color: #667eea;
+	}
+	/* Style for the active link text */
+	   .navbar a.active {
+    	   color: #667eea;
+    	   font-weight: 600;
+	}
+
+	/* Style for the animated underline */
+	.nav-underline {
+    	   position: absolute;
+    	   bottom: 1.5rem; /* Adjust this value to position the line correctly */
+    	   left: 0;
+    	   height: 3px;
+    	   background-color: #667eea;
+    	   border-radius: 2px;
+    	   transition: left 0.3s ease, width 0.3s ease;
+	}
+
+
+	/* Responsive Navbar */
+	@media (max-width: 768px) {
+    	   .navbar {
+            	position: static;
+            	padding: 1rem 0;
+            	text-align: center;
+            	width: 100%;
+    	    }
+    	    .navbar ul {
+            	justify-content: center;
+            	flex-wrap: wrap;
+    	    }
+	    .nav-underline {
+        	         display: none; /* Hide the line on smaller screens */
+    	    }
+	}
+	
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+.avatar {
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
+  background: linear-gradient(135deg,#1f2937,#0f1724);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 20px 40px rgba(2,6,23,0.6);
+}
+.avatar img {
+  width: 96%;
+  height: 96%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+	    
+        }
+
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 0 60px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+	.profile-image img {
+    	   width: 100%;
+    	   height: 100%;
+    	   border-radius: 50%;
+    	   object-fit: cover; /* makes sure image fills the circle */
+	}
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .name {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .location {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.1rem;
+        }
+
+        /* Contact Info */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            color: #667eea;
+        }
+
+        .contact-item a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #667eea;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .section-header i {
+            color: #667eea;
+            font-size: 1.8rem;
+        }
+
+        /* About Section */
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Education Cards */
+        .education-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .education-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .education-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+
+        .degree {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .institution {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        .cgpa {
+            float: right;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #a5b4fc;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-features {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .project-features li {
+            padding: 0.3rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .project-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(118, 75, 162, 0.2);
+            color: #c4b5fd;
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(118, 75, 162, 0.3);
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .achievement-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .achievement-item::before {
+            content: '🏆';
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            opacity: 0.3;
+        }
+
+        .achievement-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .achievement-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Hobbies */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .hobby-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .hobby-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .hobby-item i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .name {
+                font-size: 2.5rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hobbies-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
 </head>
-
-
 <body>
-<header class="top-navbar">
-  <nav class="nav-links">
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#achievements">Honors</a>
-  </nav>
-</header>
- <!-- SCROLL CONTAINER -->
-  <div class="page-container">
+    <!-- Animated Background -->
+    <div class="background"></div>
+    
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
 
-
-
-
-
-
-  <!-- Profile Section -->
-  <section class="hero-section" id="about">
-  <div class="left-section">
-    <img class="profile-pic" src="fest.jpg" alt="Profile Picture" />
-  </div>
-  <div class="right-section">
-    <h1 class="name-heading">POTTIGARI HARSHITHA</h1>
-    <div class="top-line"></div>
-
-    <div class="col">
-      <p><strong>Date of birth:</strong> 15/11/2003</p>
-      <p><strong>Email address:</strong> <a href="mailto:pottigariharshitha@gmail.com">pottigariharshitha@gmail.com</a></p>
-      <p><strong>Phone number:</strong> 6281114556</p>
-      <p><strong>Nationality:</strong> Indian</p>
-      <p><strong>Address:</strong> 9/836, Saipeta, Kadapa, AP</p>
-      <p><strong>GitHub:</strong> <a href="https://github.com/harshitha0315" target="_blank">github.com/harshitha0315</a></p>
-    </div>
-
-    <div class="bottom-line"></div>
-
-    <div class="summary">
-      <p>
-        Engineering graduate with a solid foundation in Computer Science and Engineering field and hands-on experience from academic projects. Eager to apply my technical skills and problem-solving abilities to drive innovation and contribute to the organization's success. Committed to continuous learning and professional growth, with a strong desire to make a meaningful impact in a dynamic engineering environment.
-      </p>
-    </div>
-  </div>
-</section>
-
-
-
-  <!-- Education Section -->
-<section class="section purple-section" id="education">
-  <h2>Education</h2>
-  <div class="education-timeline purple-box">
-    <div class="timeline-item">
-      <div class="timeline-marker"></div>
-      <div class="timeline-content">
-        <p class="degree"><strong>BE | Computer Science Engineering</strong></p>
-        <p class="institution">Saveetha School of Engineering</p>
-        <p class="location">Chennai | India</p>
-	<p class="duration">2021 – 2025</p>
-        <p class="cgpa">8.8 CGPA</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-marker"></div>
-      <div class="timeline-content">
-        <p class="degree"><strong>12th Grade | Maths-Physics-Chemistry</strong></p>
-        <p class="institution">Narayana Junior College</p>
-        <p class="location">Kadapa | India</p>
-        <p class="duration">2019 – 2021</p>
-        <p class="cgpa">8.89 CGPA</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-marker"></div>
-      <div class="timeline-content">
-        <p class="degree"><strong>10th Grade | Aggregate</strong></p>
-        <p class="institution">Sri Chaitanya School</p>
-        <p class="location">Kadapa | India</p>
-        <p class="duration">2018 – 2019</p>
-        <p class="cgpa">9.5 CGPA</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <!-- Skills Section -->
-  <section class="section" id="skills">
-    <h2>Skills</h2>
-    <div class="scroll-box">
-    <div class="info-box">
-      <div class="skills-bar">
-        <span>Java</span>
-        <div class="bar"><div class="bar-fill" style="width: 80%;"></div></div>
-      </div>
-      <div class="skills-bar">
-        <span>SQL</span>
-        <div class="bar"><div class="bar-fill" style="width: 60%;"></div></div>
-      </div>
-      <div class="skills-bar">
-        <span>C</span>
-        <div class="bar"><div class="bar-fill" style="width: 50%;"></div></div>
-      </div>
-    </div>
-<h2>Soft Skills</h2>
-    <div class="info-box">
-      <div class="skills-bar">
-        <span>Hard Working</span>
-        <div class="bar"><div class="bar-fill" style="width: 80%;"></div></div>
-      </div>
-      <div class="skills-bar">
-        <span>Time Management</span>
-        <div class="bar"><div class="bar-fill" style="width: 60%;"></div></div>
-      </div>
-      <div class="skills-bar">
-        <span>Problem Solving</span>
-        <div class="bar"><div class="bar-fill" style="width: 50%;"></div></div>
-      </div>
-    </div>
-<h2>Familiar with</h2>
-    <div class="info-box">
-      <div class="skills-bar">
-        <span>Figma Design</span>
-        <div class="bar"><div class="bar-fill" style="width: 80%;"></div></div>
-      </div>
-      <div class="skills-bar">
-        <span>App Development</span>
-        <div class="bar"><div class="bar-fill" style="width: 60%;"></div></div>
-      </div>
-    </div>
-</div>
-  </section>
-
- <!-- Projects Section -->
-  <section class="purple-section" id="projects">
-    <h2>Projects</h2>
-<div class="scroll-box">
-      <div class="project">
-        <h3>Employee Management for Advertising Agency with AR feature (Android & iOS)</h3>
-        <p>
- Developed a cross-platform Employee Management System tailored for an advertising agency using Flutter, supporting
- iOS and Android platforms. The application features three distinct user roles—Admin, Employee, and Client—to
- streamline project workflows. Clients can request projects, track progress, and view deliverables in augmented reality
- (AR) for an immersive experience. Admins oversee task assignments, manage submissions, and facilitate communication
- between employees and clients. Employees can efficiently manage tasks, upload completed work, and communicate
- with the Admin. This system enhances productivity and fosters seamless collaboration between stakeholders while
- integrating cutting-edge AR technology for enhanced client satisfaction.
-        </p>
-
-	 <h3>Smart Home Automation and Security</h3>
-        <p>
- Designed and implemented a Smart Home Automation and Security system aimed at optimizing home safety,
- convenience, energy efficiency, and cost savings. Integrated machine learning algorithms, particularly the Naive Bayes,
- to enhance security features. Utilized Google Colab for project implementation and SPSS for accuracy comparisons
- against alternative algorithms.
-        </p>
-
-      </div>
-
-</div>
-  </section>
-
-<!-- Achievements Section -->
-<section class="section" id="achievements">
-  <h2>Honors and Achievements</h2>
-<div class="scroll-box">
-    <ul class="achievements-list">
-	<li>
-        Honored with the Student Topper Award and a cash prize for securing a position in the 96th percentile in academics for November 2022.
-      </li>
-
-      <li>
-        Earned NPTEL Silver Certification in (Internet of Things) and Elite Certification in (Machine Learning) and Silver Cer
-tification in (Technical English).
-      </li>
-      <li>
-        Achieved certification as an Oracle Cloud Infrastructure 2024 Generative AI Professional, reflecting a strong grasp of advanced AI technologies.
-      </li>
-      <li>
-        Successfully completed the Data Analysis Essentials course from CISCO Networking Academy, gaining key foundational skills in data analysis.
-      </li>
-      <li>
-        Presented a project at the 3rd International Conference on Sustainable Materials and Technologies for Bio and Energy Applications (SMTBA-2024) at SSN Research Centre.
-      </li>
+    <div class="container">
+<nav class="navbar">
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#honors">Honors</a></li>
+        <li><a href="#hobbies">Hobbies</a></li>
     </ul>
+    <div class="nav-underline" id="nav-underline"></div>
+</nav>
+        <!-- Header Section -->
+        <div class="glass-card fade-in-up" id="home">
+            <div class="header">
+                <div class="profile-container">
+                    <div class="profile-image">
+			 <img src="fest.jpg" alt="Profile">
+                    </div>
+                </div>
+                <h1 class="name">Harshitha Pottigari</h1>
+                <p class="title">Computer Science Engineering Student</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Andhra Pradesh, India</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>6281114556</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:pottigariharshitha@gmail.com">pottigariharshitha@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://linkedin.com/in/pottigari-harshitha" target="_blank">LinkedIn Profile</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/harshitha0315" target="_blank">GitHub Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</div>
-</section>
-</div>
-<!-- Credits Section -->
-<section class="credits">
-  <div class="credits-content">
-    <p>Designed and developed by <strong>Pottigari Harshitha</strong></p>
-      </div>
-</section>
+        <!-- About Section -->
+        <div class="glass-card fade-in-up" id="about">
+            <h2 class="section-header">
+                <i class="fas fa-user-circle"></i>
+                About Me
+            </h2>
+            <p class="about-text">
+                Engineering graduate with a solid foundation in Computer Science and Engineering field and hands-on experience from academic projects. Eager to apply my technical skills and problem-solving abilities to drive innovation and contribute to the organization's success. Committed to continuous learning and professional growth, with a strong desire to make a meaningful impact in a dynamic engineering environment.
+            </p>
+        </div>
 
+        <!-- Education Section -->
+        <div class="glass-card fade-in-up" id="education">
+            <h2 class="section-header">
+                <i class="fas fa-graduation-cap"></i>
+                Education
+            </h2>
+            <div class="education-grid">
+                <div class="education-item">
+                    <div class="cgpa">CGPA: 8.8</div>
+                    <div class="degree">Bachelor of Engineering</div>
+                    <div class="institution">Saveetha School of Engineering, Chennai</div>
+                    <div class="duration">Computer Science Engineering • 2021 - 2025</div>
+                </div>
+                <div class="education-item">
+                    <div class="cgpa">CGPA: 8.89</div>
+                    <div class="degree">12th Grade</div>
+                    <div class="institution">Narayana Junior College, Kadapa</div>
+                    <div class="duration">Maths, Physics, Chemistry • 2019 - 2021</div>
+                </div>
+                <div class="education-item">
+                    <div class="cgpa">CGPA: 9.5</div>
+                    <div class="degree">10th Grade</div>
+                    <div class="institution">Sri Chaitanya School, Kadapa</div>
+                    <div class="duration">2018 - 2019</div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Skills Section -->
+        <div class="glass-card fade-in-up" id="skills">
+            <h2 class="section-header">
+                <i class="fas fa-code"></i>
+                Skills
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-category glass-card">
+                    <h3><i class="fas fa-laptop-code"></i> Technical Skills</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">C</span>
+                        <span class="skill-tag">SQL</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card">
+                    <h3><i class="fas fa-tools"></i> Development</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">Code Debugging</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Front-end Frameworks</span>
+                        <span class="skill-tag">API Integration</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card">
+                    <h3><i class="fas fa-users"></i> Soft Skills</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">Hard Worker</span>
+                        <span class="skill-tag">Time Management</span>
+                        <span class="skill-tag">Problem Solving</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      console.log("Toggling sidebar visibility");
-      sidebar.classList.toggle('open');
-      console.log(sidebar.classList);
-    }
-  </script>
-</body>
-</html>
+        <!-- Projects Section -->
+        <div class="glass-card fade-in-up" id="projects">
+            <h2 class="section-header">
+                <i class="fas fa-project-diagram"></i>
+                Projects
+            </h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Smart Home Automation and Security</h3>
+                    <p class="project-description">
+                        Designed and implemented a comprehensive smart home system focused on safety, convenience, energy efficiency, and cost savings with integrated machine learning capabilities.
+                    </p>
+                    <ul class="project-features">
+                        <li>Integrated machine learning algorithms, particularly Naive Bayes, to enhance home security features</li>
+                        <li>Utilized Google Colab for model training and development</li>
+                        <li>Performed algorithm accuracy comparisons using SPSS benchmarking</li>
+                        <li>Achieved optimal performance through systematic algorithm testing</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">Naive Bayes</span>
+                        <span class="tech-tag">Google Colab</span>
+                        <span class="tech-tag">SPSS</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="project-title">Employee Management for Advertising Agency</h3>
+                    <p class="project-description">
+                        Developed a comprehensive cross-platform Flutter application tailored for advertising agency operations with AR integration and multi-role functionality.
+                    </p>
+                    <ul class="project-features">
+                        <li>Implemented three user roles: Admin, Employee, and Client for streamlined workflows</li>
+                        <li>Enabled Clients to request projects, track progress, and view deliverables in AR</li>
+                        <li>Designed Admin interface for task assignment and communication management</li>
+                        <li>Built comprehensive features for employee task management and collaboration</li>
+                        <li>Enhanced productivity through immersive AR integration</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Android</span>
+                        <span class="tech-tag">iOS</span>
+                        <span class="tech-tag">Augmented Reality</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="glass-card fade-in-up" id="honors">
+            <h2 class="section-header">
+                <i class="fas fa-trophy"></i>
+                Honors & Achievements
+            </h2>
+            <div class="achievements-grid">
+                <div class="achievement-item">
+                    <div class="achievement-title">Student Topper Award - 96th Percentile</div>
+                    <p>Honored with cash prize for securing a position in the 96th percentile in academics for November 2022</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-title">NPTEL Certifications</div>
+                    <p>Silver Certification in Internet of Things, Elite Certification in Machine Learning, and Silver Certification in Technical English</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-title">Oracle Cloud Infrastructure 2024 AI Professional</div>
+                    <p>Certified as Generative AI Professional, reflecting strong grasp of advanced AI technologies</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-title">CISCO Data Analysis Essentials</div>
+                    <p>Successfully completed course from CISCO Networking Academy, gaining foundational skills in data analysis</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-title">International Conference Presentation</div>
+                    <p>Presented project at the 3rd International Conference on Sustainable Materials and Technologies (SMTBA-2024)</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-title">TalentNext Java Full Stack Development</div>
+                    <p>Completed comprehensive course and earned certificate of achievement</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hobbies Section -->
+        <div class="glass-card fade-in-up" id="hobbies">
+            <h2 class="section-header">
+                <i class="fas fa-heart"></i>
+                Hobbies & Interests
+            </h2>
+            <div class="hobbies-grid">
+                <div class="hobby-item">
+                    <i class="fas fa-music"></i>
+                    <h3>Listening Music</h3>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-dance"></i>
+                    <h3>Dancing</h3>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-plane"></i>
+                    <h3>Travelling</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random horizontal position
+                particle.style.left = Math.random() * 100 + '%';
+                
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all glass cards
+        document.addEventListener('DOMContentLoaded', () => {
+            createBubbles();
+            createFloatingShapes();
+            createParticles();
+            
+            document.querySelectorAll('.glass-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add mouse movement parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            document.querySelectorAll('.glass-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardX = (rect.left + rect.width / 2) / window.innerWidth;
+                const cardY = (rect.top + rect.height / 2) / window.innerHeight;
+                
+                const diffX = mouseX - cardX;
+                const diffY = mouseY - cardY;
+                
+                card.style.transform = `perspective(1000px) rotateX(${diffY * 2}deg) rotateY(${diffX * 2}deg) translateZ(0)`;
+            });
+        });
+
+        // Reset transform on mouse leave
+        document.addEventListener('mouseleave', () => {
+            document.querySelectorAll('.glass-card').forEach(card => {
+                card.style.transform =
